@@ -1,0 +1,59 @@
+/* styles.css */
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 200px; /* Fixed width for the select element */
+  }
+  
+  .select-selected {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%; /* Ensure it takes the full width of the parent */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide any overflowing content */
+    text-overflow: ellipsis; /* Add ellipsis (...) if text overflows */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .select-items {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    z-index: 99;
+    width: 100%; /* Ensure it takes the full width of the parent */
+    max-height: 200px;
+    overflow-y: auto;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .select-hide {
+    display: none;
+  }
+  
+  .select-option {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%; /* Ensure it takes the full width of the parent */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .select-option i {
+    margin-right: 10px;
+  }
+  
+  .select-option:hover {
+    background-color: #e9e9e9;
+  }
+  
+  .select-arrow {
+    margin-left: 10px; /* Space between the text and the arrow icon */
+  }
+  

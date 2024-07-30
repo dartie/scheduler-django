@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Task scheduler</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicons/task3.png' %}" >
+
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Datatable -->
+    {% comment %}
+    <!-- Datatable Plain style -->
+    <!--<link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.8/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/date-1.5.2/fc-5.0.1/fh-4.0.1/kt-2.12.1/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.7.1/sp-2.3.1/sl-2.0.3/sr-1.4.1/datatables.min.css" rel="stylesheet">-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>-->
+    <!--<script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.8/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/date-1.5.2/fc-5.0.1/fh-4.0.1/kt-2.12.1/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.7.1/sp-2.3.1/sl-2.0.3/sr-1.4.1/datatables.min.js"></script>-->
+    {% endcomment %}
+
+    <!-- Datatable Bootstrap 5 style-->
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/date-1.5.2/fc-5.0.1/fh-4.0.1/kt-2.12.1/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.7.1/sp-2.3.1/sl-2.0.3/sr-1.4.1/datatables.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/date-1.5.2/fc-5.0.1/fh-4.0.1/kt-2.12.1/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.7.1/sp-2.3.1/sl-2.0.3/sr-1.4.1/datatables.min.js"></script>
+
+    <!-- Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+
+    <!-- Bootstrap 5 icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Highlighting.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    {% comment %}
+    <!-- Vanilla datapicker: https://mymth.github.io/vanillajs-datepicker/#/?id=using-from-browser -->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css">-->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-foundation.min.css">-->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs4.min.css">-->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bulma.min.css">-->
+    {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
+
+    <!-- Custom -->
+    <script src="{% static "js/common.js" %}" type="text/javascript"></script>
+
+    <!-- Custom element: Select with icons -->
+    <link rel="stylesheet" href="{% static "css/select-with-icons.css" %}">
+    <script src="{% static "js/select-with-icons.js" %}" type="text/javascript"></script>
+
+    <style>
+        .mono {
+            font-family: monospace, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Modal Schedule new task -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog"> <!--  modal-dialog-centered modal-dialog-scrollable -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"> <i class="bi bi-calendar4-event"></i>&nbsp;Schedule task </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="dateTimeMode" id="radioDateTime" autocomplete="off" checked>
+                        <label class="btn btn-outline-secondary" for="radioDateTime">Date / Time</label>
+
+                        <input type="radio" class="btn-check" name="dateTimeMode" id="radioRelativeTimes" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="radioRelativeTimes">Relative Times</label>
+                    </div>
+
+                    <div id="relativeTime" class="input-group mb-3">
+                        <input class="form-control" list="relativeTimeOptions" id="relativeTimeDataList" placeholder="for the syntax see `at` command documentation">
+                        <datalist id="relativeTimeOptions">
+                            <option value="now ">
+                            <option value="tomorrow ">
+                            <option value="now +1 minute ">
+                            <option value="now +5 minute ">
+                        </datalist>
+                    </div>
+
+                    <div class="input-group mb-3" id="datetimeSchedule">
+                        <span class="input-group-text"><i class="bi bi-calendar4-event"></i></span>
+                        <!--<input type="text" class="form-control" name="DatetimeScheduleSelection" id="DatetimeScheduleSelection">-->
+                        <input class="form-control" type="datetime-local" id="DatetimeScheduleSelection" name="DatetimeScheduleSelection">
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="command" name="command" placeholder="Command">
+                        <label for="command">Command</label>
+                    </div>
+
+                    <!-- Alert for schedule feedback -->
+                    <div id="scheduleTaskAlert" class="alert alert-success d-flex align-items-center alert-dismissible fade show d-none" role="alert">
+                        <!--<i id="scheduleTaskAlertIcon" class="bi bi-check2">&nbsp;</i>-->
+                        <div id="scheduleTaskAlertText">Alert text</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="scheduleTaskAjax()">Schedule</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for confirming delete -->
+    <div class="modal fade" id="ModalDeletion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalDeletionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ModalDeletionLabel"><span class="bi bi-exclamation-square-fill" style="color: red; font-size: 2rem;"></span>&nbsp;Job deletion</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="modalDeleteConfirmBody" class="modal-body">
+              Are you sure you want to delete Job <!-- Text Set by Javascript -->
+            </div>
+
+            <!-- Alert for schedule feedback -->
+            <div id="deletionTaskAlert" class="alert alert-success d-flex align-items-center alert-dismissible fade show d-none" role="alert">
+              <div id="deletionTaskAlertText">Alert text</div>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" id="modalDeleteConfirmBtn">Yes</button>  <!-- OnClick function Set by Javascript -->
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Top navbar -->
+    <div class="container sticky-top">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+{% if manage_jobs                                                                                                     %}
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <!-- Button trigger modal -->
+                    <i class="bi bi-calendar4-event"></i>&nbsp;Schedule task
+                </button>
+
+                <div>
+                    <div class="col-4">
+                        <div class="custom-select">
+                            <div id="statusFilter" class="select-selected form-control"> <i class="bi bi-arrows-fullscreen"></i> All <i class="bi bi-chevron-down select-arrow"></i></div>
+                            <div class="select-items select-hide">
+                                <div class="select-option" data-value="all">
+                                    <i class="bi bi-arrows-fullscreen"></i> All
+                                </div>
+                                <div class="select-option" data-value="scheduled">
+                                    <i class="bi bi-alarm" style="color: darkslategrey"></i> Scheduled
+                                </div>
+                                <div class="select-option" data-value="executed">
+                                    <i class="bi bi-caret-right-square-fill" style="color: #9CDBA6"></i> Executed
+                                </div>
+                                <div class="select-option" data-value="failed">
+                                    <i class="bi bi-x-lg" style="color: #FFA38F"></i> Failed
+                                </div>
+                                <div class="select-option" data-value="cancelled">
+                                    <i class="bi bi-ban-fill" style="color: #FFA38F"></i> Cancelled
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button id="btn-show-all-children" class="btn btn-secondary" type="button">Expand All</button>
+                    <button id="btn-hide-all-children" class="btn btn-secondary" type="button">Collapse All</button>
+                </div>
+
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#ModalDeletion" onclick="modalResetDB()"> <!-- Button trigger modal -->
+                    <i class="bi bi-database-x"></i>&nbsp;Reset DB
+                </button>
+{% endif                                                                                                              %}
+                {% comment %}
+                <!--
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                    -->
+                    <!--
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    -->
+                    {% endcomment %}
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+</html>

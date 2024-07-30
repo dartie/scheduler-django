@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<script src="{% static "js/jobs.js" %}" type="text/javascript"></script>
+
+<style>
+    td.details-control {
+        background: url('https://cdn.rawgit.com/DataTables/DataTables/6c7ada53ebc228ea9bc28b1b216e793b1825d188/examples/resources/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+    tr.shown td.details-control {
+        background: url('https://cdn.rawgit.com/DataTables/DataTables/6c7ada53ebc228ea9bc28b1b216e793b1825d188/examples/resources/details_close.png') no-repeat center center;
+    }
+</style>
+{% comment %}
+<!-- Dropdown filter for Status -->
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <label for="statusFilter" class="col-sm-2 col-form-label">Filter by Status</label>
+
+        <div class="col-4">
+            <div class="custom-select">
+                <div id="statusFilter" class="select-selected form-control"> <i class="bi bi-arrows-fullscreen"></i> All <i class="bi bi-chevron-down select-arrow"></i></div>
+                <div class="select-items select-hide">
+                    <div class="select-option" data-value="all">
+                        <i class="bi bi-arrows-fullscreen"></i> All
+                    </div>
+                    <div class="select-option" data-value="scheduled">
+                        <i class="bi bi-alarm" style="color: darkslategrey"></i> Scheduled
+                    </div>
+                    <div class="select-option" data-value="executed">
+                        <i class="bi bi-caret-right-square-fill" style="color: #9CDBA6"></i> Executed
+                    </div>
+                    <div class="select-option" data-value="failed">
+                        <i class="bi bi-x-lg" style="color: #FFA38F"></i> Failed
+                    </div>
+                    <div class="select-option" data-value="cancelled">
+                        <i class="bi bi-ban-fill" style="color: #FFA38F"></i> Cancelled
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcomment %}
+
+{% comment %}
+<!-- Dropdown filter for Status -->
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <label for="statusFilter" class="col-sm-2 col-form-label">Filter by Status</label>
+
+        <div class="col-4">
+            <select id="statusFilter_" class="form-select" aria-label="" onchange="datatableFilterStatus(this);">
+                <option value="all" selected>All</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="executed">Executed</option>
+                <option value="failed">Failed</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+        </div>
+    </div>
+</div>
+{% endcomment %}
+
+<!-- Datatable -->
+<div class="container mb-5">
+    <div class="table-responsive">
+        <table id="example" class="display table table-striped table-bordered" style="width:100%">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Actions</th>
+                <th>Job ID</th>
+                <th>Schedule Date/Time</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let csrf_token = `{{ csrf_token }}`;
+</script>
+{% endblock %}
