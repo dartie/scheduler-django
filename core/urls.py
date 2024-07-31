@@ -17,8 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from rest_framework.authtoken.views import obtain_auth_token            # <-- Request Token
-from lc_alm import views as lc_alm_views
-from lc_handsoft import views as lc_handsoft_views
 from scheduler.views import view_jobs, load_jobs_ajax, test_schedule_jobs, schedule_job, delete_job, reset_db
 from scheduler import views as scheduler_views
 
@@ -26,12 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),  # <-- Request Token
 
-    # API
-    path('api/alm/salesforce/', lc_alm_views.GenerateLicense.as_view(), name='generate-alm-license'),
-    path('api/handsoft/salesforce/', lc_handsoft_views.GenerateLicense.as_view(), name='generate-handsoft-license'),
-    path('api/schedule-job/', scheduler_views.ScheduleJob.as_view(), name='api-schedule-job'),
 
     # Scheduler
+    path('api/schedule-job/', scheduler_views.ScheduleJob.as_view(), name='api-schedule-job'),  # API
     path('jobs/', view_jobs, name='view-jobs'),
     path('load-jobs/', load_jobs_ajax, name='load-jobs'),
     path('test-schedule-jobs/', test_schedule_jobs, name='test-schedule-jobs'),
