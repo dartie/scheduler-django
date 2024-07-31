@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Add event listener for opening and closing details
-    $('#example tbody').on('click', 'td:first-child', function () {
+    $('#example tbody').on('click', '.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
 
