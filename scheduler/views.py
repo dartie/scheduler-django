@@ -78,7 +78,7 @@ def schedule_job(request, api=False):
     if datetime_mode == "absolute":
         date_time_datetime = dateutil.parser.parse(date_time)
 
-        schedule_time_at_string = f"{date_time_datetime.strftime("%H:%M %Y-%m-%d")}"
+        schedule_time_at_string = date_time_datetime.strftime("%H:%M %Y-%m-%d")
     else:
         # relative
         schedule_time_at_string = request.POST.get("schedule_relative_time")
