@@ -1,7 +1,6 @@
 import datetime
 import os
 import subprocess
-from subprocess import Popen, PIPE
 from colorama import Fore, Back, Style, init
 from typing import Literal
 
@@ -36,7 +35,7 @@ def run_process(cmd, cwd=None):
 def run_process_a(cmd):
     shell = True if os.sep == "\\" else False
 
-    p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=shell, universal_newlines=True, text=True)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell, universal_newlines=True, text=True)
     p_out, p_err = p.communicate()
     p_rc = p.returncode
 
