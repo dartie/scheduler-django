@@ -25,32 +25,6 @@ def get_current_path():
     return os.path.dirname(os.path.realpath(__file__))
 
 
-def test_schedule_jobs(request):
-    # current_job_id=atq | awk '{system("echo "$1 "  $(date +%Y-%m-%d_%H-%M-%S --date \""$2" "$3" "$4" "$5" "$6"\")  "$7"  "$8 )}' | sort -k2 | perl -ne'($q,$j)=/((\d+).*)/;qx(at -c $j)=~/(marcinDEL\w+).\n(.*?)\n\1/s;print"$q $2"' | head -1 | awk '{print $1}' && echo "curl --request POST --url http://localhost:9001/api/alm/salesforce/ --header 'Authorization: Token a775050e6ca5467bf7ec9c6529925e4af95a1142' --header 'Content-Type: application/json' --data '{\"generate\":{\"quantity\":10,\"product\":\"Helix ALM suite\",\"type\":\"Floating\",\"version\":\"Maint\",\"cloudkey\":false,\"expiration\":\"2024-12-18\"}, \"job\": $current_job_id}' > job_$current_job_id.txt" | at now
-    pass
-    # get id of current job
-    jobs_list, _ = load_jobs()
-
-    # test
-    jobs_list.append(['1', datetime.datetime(2024, 8, 25, 12, 00)])
-    jobs_list.append(['2', datetime.datetime(2024, 6, 25, 12, 00)])
-    jobs_list.append(['10', datetime.datetime(2024, 6, 24, 12, 00)])
-    jobs_list.append(['5', datetime.datetime(2026, 6, 25, 12, 00)])
-    #
-
-    jobs_sorted_by_date_time_asc = sorted(jobs_list, key=lambda x: x[1])
-    if not jobs_sorted_by_date_time_asc:
-        return # TODO: return something appropriate
-
-    current_job_id = jobs_sorted_by_date_time_asc[0][0]
-
-    #command_string = 'current_job_id=atq | awk \'{system("echo "$1 "  $(date +%Y-%m-%d_%H-%M-%S --date \""$2" "$3" "$4" "$5" "$6"\")  "$7"  "$8 )}\' | sort -k2 | perl -ne\'($q,$j)=/((\d+).*)/;qx(at -c $j)=~/(marcinDEL\w+).\n(.*?)\n\1/s;print"$q $2"\' | head -1 | awk \'{print $1}\' && echo "curl --request POST --url http://localhost:9001/api/alm/salesforce/ --header \'Authorization: Token a775050e6ca5467bf7ec9c6529925e4af95a1142\' --header \'Content-Type: application/json\' --data \'{\"generate\":{\"quantity\":10,\"product\":\"Helix ALM suite\",\"type\":\"Floating\",\"version\":\"Maint\",\"cloudkey\":false,\"expiration\":\"2024-12-18\"}, \"job\": $current_job_id}\' > job_${current_job_id}.txt" | at now +1 minute'
-    command_string = r"""echo "current_job_id=\$(atq | awk '{system(\"echo \"\$1 \"  \$(date +%Y-%m-%d_%H-%M-%S --date \\\"\"\$2\" \"\$3\" \"\$4\" \"\$5\" \"\$6\"\\\")  \"\$7\"  \"\$8 )}' | sort -k2 | perl -ne'(\$q,\$j)=/((\d+).*)/;qx(at -c \$j)=~/(marcinDEL\w+).\n(.*?)\n\1/s;print\"\$q \$2\"' | head -1 | awk '{print \$1}') ; bash -c \"curl --request POST --url http://localhost:9001/api/alm/salesforce/ --header 'Authorization: Token a775050e6ca5467bf7ec9c6529925e4af95a1142' --header 'Content-Type: application/json' --data '{\\\"generate\\\":{\\\"quantity\\\":10,\\\"product\\\":\\\"Helix ALM suite\\\",\\\"type\\\":\\\"Floating\\\",\\\"version\\\":\\\"Maint\\\",\\\"cloudkey\\\":false,\\\"expiration\\\":\\\"2024-12-18\\\"},\\\"job\\\": \$current_job_id }'\"" | at now +1 minute"""
-    r = subprocess.run(command_string, shell=True, text=True, universal_newlines=True, capture_output=True)
-
-    print()
-
-
 def reset_db(request):
     try:
         Jobs.objects.all().delete()
